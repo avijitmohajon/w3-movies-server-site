@@ -8,8 +8,7 @@ const port = process.env.PORT || 5000;
 // middleWare
 app.use(cors());
 app.use(express.json());
-app.get(['/*.ico', '/*.png'], (req, res) => res.status(204).end());
-
+app.get(["/*.ico", "/*.png"], (req, res) => res.status(204).end());
 
 const uri = `mongodb+srv://${process.env.USER_DB}:${process.env.PASS_DB}@cluster0.wye4e.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 
@@ -70,7 +69,11 @@ async function run() {
         },
       };
 
-      const result = await moviesCollection.updateOne(filter, setUpdateMovie, options);
+      const result = await moviesCollection.updateOne(
+        filter,
+        setUpdateMovie,
+        options
+      );
       res.send(result);
     });
 
@@ -93,7 +96,6 @@ run().catch(console.dir);
 
 app.get("/", (req, res) => {
   res.send("movies server is running");
-
 });
 app.listen(port, () => {
   // console.log(`movies server is running on port :${port}`);
